@@ -4,6 +4,25 @@ body{
 	font-family:			sans-serif;
 	font-size:				16px;
 	vertical-align:			top;
+	text-align:				center;
+}
+
+h1{
+	text-align:				center;
+}
+
+h4{
+	text-align:				center;
+}
+
+#newMessage{
+	width:					400px;
+	margin:					auto;
+	text-align:				left;
+}
+
+#newMessage #msgSubmit{
+	margin-left:			25%;
 }
 
 .messageBox{
@@ -24,11 +43,19 @@ body{
 	padding:				2px;
 	border-radius:			4px;
 	background-color:		#ADF;
-	font-size:				1.4em;
+	font-size:				1.2em;
 	color:					#248;
 }
 
 .messageBox p{
 	font-size:				1em;
 	color:					#24F;
+}
+
+.nostyle:link{
+	text-decoration:		none;
+}
+
+.nostyle:visited{
+	text-decoration:		none;
 }
