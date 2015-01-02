@@ -5,6 +5,7 @@ from ChatHub.views import *
 
 urlpatterns = patterns('ChatHub.views',
     url(r'^admin/', include(admin.site.urls)),
-	url(r'^msg/(\d+)[/]?$',router,{'GET':message_get}),
-	url(r'^msg[/]?$',router,{'GET':new_message,'POST':message_post}),
+	url(r'^msg/(\d+)[/]?$',router,{'GET':message_get,}),
+	url(r'^msg[/]?$',router,{'GET':message_getall,'POST':message_post}),
+	url(r'^index[/]?$',router,{'GET':new_message,}),
 )

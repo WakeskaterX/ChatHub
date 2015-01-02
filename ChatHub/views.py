@@ -22,11 +22,18 @@ def router(request, *args, **kwargs):
 
 def message_get(request, *args, **kwargs):
 	try:
-		msg = Message.objects.get(id=args[0])
-		
+		msg = Message.objects.get(id=int(args[0]))	
+		return render(request,'allMessages.html',{'messages':(msg,)})
 	except:
 		return HttpResponse("No Message Found")
-	
+
+def message_getall(request):
+	try:
+		all_msg = Message.objects.all()
+	except:
+		all_msg = ({'user':'-','text':'N/A','id':'-1'},)
+	return render(request,'allMessages.html',{'messages':all_msg})
+
 def message_post(request, *args, **kwargs):
 	#Post a new Message (via POST)
 	assert request.method == 'POST'
@@ -36,7 +43,7 @@ def message_post(request, *args, **kwargs):
 		ms = request.POST.get("message")
 		new_msg = Message(user=nm,text=ms)
 		new_msg.save()
-		return HttpResponse("Saved message!")
+		return HttpResponseRedirect('/msg/')
 	else:
 		raise Http404
 

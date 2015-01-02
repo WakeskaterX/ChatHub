@@ -1,0 +1,13 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+<div style="text-align:center;">
+	<h1>Messages</h1>
+	{% for message in messages %}
+		<div class="messageBox">
+		<h3>User: {{message.user}}, ID: {{message.id}}{% if message.parent %}, Parent: {{message.parent}}{% endif %}</h3>
+		<p>{{message.text}}</p>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}
