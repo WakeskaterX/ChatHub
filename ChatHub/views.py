@@ -24,8 +24,16 @@ def router(request, *args, **kwargs):
 def message_get(request, *args, **kwargs):
 	try:
 		msg = Message.objects.get(id=int(args[0]))	
-		return render(request,'singleMessage.html',{'messages':(msg,)})
-	except:
+		try:
+			kids = Message.objects.filter(parent_id=msg.id)
+		except ObjectDoesNotExist:
+			kids = None
+		try:
+			parent = Message.objects.get(id=msg.parent_id)
+		except ObjectDoesNotExist:
+			parent = None
+		return render(request,'singleMessage.html',{'message':msg,'children':kids,'parent':parent})
+	except ObjectDoesNotExist:
 		return HttpResponse("No Message Found")
 
 def message_getall(request):

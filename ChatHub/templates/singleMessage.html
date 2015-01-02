@@ -4,10 +4,20 @@
 <div style="text-align:center;">
 	<h1><a class="nostyle" href="http://localhost:8000/msg/">Messages</a></h1>
 	<h4><a class="nostyle" href="http://localhost:8000/index">Create New Message</a></h4>
-	{% for message in messages %}
-		<div class="messageBox" onclick="viewMessage({{message.id}});">
+	{% if parent %}
+	<div class="messageBox" onclick="viewMessage({{parent.id}});">
+		<h3>User: {{parent.user}}, ID: {{parent.id}}{% if parent.parent_id %} >> {{parent.parent_id}}{% endif %}</h3>
+		<p>{{parent.text}}</p>
+	</div><br/>
+	{% endif %}
+	<div class="messageBox" onclick="viewMessage({{message.id}});">
 		<h3>User: {{message.user}}, ID: {{message.id}}{% if message.parent_id %} >> {{message.parent_id}}{% endif %}</h3>
 		<p>{{message.text}}</p>
+	</div><br/>
+	{% for child in children %}
+		<div class="messageBoxSmall" onclick="viewMessage({{child.id}});">
+			<h3>User: {{child.user}}, ID: {{child.id}}{% if child.parent_id %} >> {{child.parent_id}}{% endif %}</h3>
+			<p>{{child.text}}</p>
 		</div>
 	{% endfor %}
 </div>
