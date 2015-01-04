@@ -69,6 +69,8 @@ def message_post(request, *args, **kwargs):
 		if (request.POST.get("parent")):
 			try:
 				new_msg.parent = Message.objects.get(id=int(request.POST.get("parent")))
+				new_msg.save()
+				return HttpResponseRedirect('/msg/'+str(new_msg.id)+'/')
 			except ObjectDoesNotExist:
 				return HttpResponse("Invalid Parent ID!")
 		new_msg.save()
@@ -79,7 +81,7 @@ def message_post(request, *args, **kwargs):
 def new_message(request, *args, **kwargs):
 	assert request.method == 'GET'
 	form = CreateForm()
-	if args[0] is not None:
+	if args:
 		if int(args[0]) > -1:
 			#Check that the message object exists for that ID and set the return form to that.
 			try: 

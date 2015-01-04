@@ -1,4 +1,7 @@
 <div class="{{boxType}}" onclick="viewMessage({{msg.id}});">
 <h3>User: {{msg.user}}, ID: {{msg.id}}{% if msg.parent_id %} >> {{msg.parent_id}}{% endif %}</h3>
 <p>{{msg.text}}</p>
+{% if boxType == 'messageBox' %}
+	<br><span class='replyButtons'>{% load staticfiles %}<img src="{% static 'ChatHub/img/reply.png' %}" alt="reply" onclick="newMessage({{msg.id}}); return false;" /></script></span>
+{% endif %}
 </div>
