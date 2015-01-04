@@ -76,12 +76,30 @@ def message_post(request, *args, **kwargs):
 	else:
 		raise Http404
 
-def new_message(request):
+def new_message(request, *args, **kwargs):
 	assert request.method == 'GET'
 	form = CreateForm()
+	if args[0] is not None:
+		if int(args[0]) > -1:
+			#Check that the message object exists for that ID and set the return form to that.
+			try: 
+				msg_test = Message.objects.get(id=int(args[0]))
+				if msg_test:
+					form = CreateForm(initial={'parent':args[0]})
+			except Message.DoesNotExist:
+				pass
+		
 	return render(request,'newMessage.html',{'form':form})
 	
 def search_message(request):
 	assert request.method == 'GET'
 	form = SearchForm()
 	return render(request,'searchMessage.html',{'form':form})
+	
+def show_single(request, *args, **kwargs):
+	assert request.method == 'GET'
+	try:
+		mess = Message.objects.get(id = int(args[0]))
+	except Message.DoesNotExist:
+		return Http404
+	return render(request,'message.html',{'msg':mess},content_type='text/plain')

@@ -1,0 +1,4 @@
+<div class="{{boxType}}" onclick="viewMessage({{msg.id}});">
+<h3>User: {{msg.user}}, ID: {{msg.id}}{% if msg.parent_id %} >> {{msg.parent_id}}{% endif %}</h3>
+<p>{{msg.text}}</p>
+</div>

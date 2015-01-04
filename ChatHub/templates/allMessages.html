@@ -5,10 +5,7 @@
 	<h1><a class="nostyle" href="http://localhost:8000/msg/">Messages</a></h1>
 	<h4><a class="nostyle" href="http://localhost:8000/index">Create New Message</a></h4>
 	{% for message in messages %}
-		<div class="messageBox" onclick="viewMessage({{message.id}});">
-		<h3>User: {{message.user}}, ID: {{message.id}}{% if message.parent_id %} >> {{message.parent_id}}{% endif %}</h3>
-		<p>{{message.text}}</p>
-		</div>
+		{% include "message.html" with msg=message boxType='messageBox' %}
 	{% endfor %}
 </div>
 {% load staticfiles %}<script src="{% static 'ChatHub/js/chitchat.js' %}"/></script>
